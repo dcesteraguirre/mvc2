@@ -13,7 +13,8 @@
         foreach ($products as $item): ?>
             <tr>
             <td>Identifiador: <?= $item[0] ?></td>
-            <td>Descripcion: <a href="?method=show&id=<?= $item[0] ?>"><?= $item[1] ?></a></td>
+            <td>Descripcion: <?= $item1[1] ?> </td>
+            <td><a href="show?id= <?= $item[0] ?>">Ver detalle</a></td>
         </tr>       
         <?php endforeach; ?>
     </table>

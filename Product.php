@@ -13,13 +13,13 @@
     }
 
     //devuelve todos los productos
-    public function all()
+    public static function all()
     {
         return Product::PRODUCTS;
     }
     
     //devolver un producto en particular
-    public function find($id)
+    public static function find($id)
     {
         return Product::PRODUCTS[$id-1];
     }

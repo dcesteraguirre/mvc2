@@ -10,7 +10,7 @@ class ProductController{
     function index(){
         //echo "<br>Dentro index de PRODUCTCONTROLLER";
         // metodo home de Controller de mvc00
-        $products = Product::all();
+        $products = \Product::all();
         require "../views/home.php";
     }//fin_mindex
 

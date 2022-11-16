@@ -1,9 +1,9 @@
 <?php
-
+namespace Dwes\Galaxias;
     const RADIO = 1.25; //millone de años luz
 
     function observar($mensaje){
-        echo"<br>EStoy mirando a la galaxia " . $mensaje;
+        echo"<br>Estoy mirando a la galaxia " . $mensaje;
     }
 
 class Galaxia{
@@ -21,4 +21,8 @@ class Galaxia{
         echo "<br>Me destruyo!!";
     }
 
+    function __toString()
+    {
+        return "Esto son galaxias superiores.";
+    }
 }

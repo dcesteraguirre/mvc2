@@ -2,4 +2,10 @@
     $dsn = "mysql:dbname=agenda;host=db";
      $usuario = "root";
      $clave = "password";
-     $bd = new PDO($dsn,$usuario,$clave);
+
+    try {
+        $bd = new PDO($dsn,$usuario,$clave);
+
+    } catch (PDOException $e){
+        echo "<br>Mensaje de la excepcion : " . $e->getMessage();
+    }

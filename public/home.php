@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(!isset($_SESSION['logeado']) || !$_SESSION['logueado']){
+    if(!isset($_SESSION['logueado']) || !$_SESSION['logueado']){
         header("Location: index.php");
     }
 ?>
@@ -14,5 +14,6 @@
 </head>
 <body>
     <h1>El usuario está en la bbdd</h1>
+    <input type="submit" name="importar" id="importar" value="ImportarDatosAgenda">
 </body>
 </html>

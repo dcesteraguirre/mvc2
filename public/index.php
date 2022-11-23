@@ -8,7 +8,7 @@
 <body>
 
 <h1>LOGIN</h1>
-    <form name ="login" action="views/validarPassword.php" method="POST">
+    <form name ="login" action="auth.php" method="POST">
     <p>
         <label for="usuario">Usuario: </label>
         <input type="text" name="usuario" id="usuario">

@@ -10,17 +10,18 @@
         $sql = "SELECT $password FROM creedenciales WHERE usuario = '$user'";
         $resultados = $bd->query($sql);
         
-        if($sql=true){
+        $verificado = false;
+        
+        if(password_verify($password,$)){
             $_SESSION['logueado'] = true;
-            header("Location: public/home.php");
+            header("Location: views/home.php");
         }
         else{
             $_SESSION['logueado'] = false;
-            header("Location: public/index.php");
+            header("Location: ../public/index.php");
         }
 
     }
     else{
-        echo "<br><h2>Introduce usuario y contraseña</h2>";
-        header("Location: public/index.php");
+        header("Location: ../public/index.php");
     }

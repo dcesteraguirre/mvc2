@@ -15,6 +15,7 @@
             if(password_verify($password,$valor[0])){
                 $_SESSION['logueado'] = true;
                 header("Location: home.php");
+                
             }
             else{
                 $_SESSION['logueado'] = false;

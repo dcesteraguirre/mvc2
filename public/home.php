@@ -13,7 +13,24 @@
     <title>Document</title>
 </head>
 <body>
+    <header>
+    <a href="home.php">Inicio</a>
+    <a href="crearContacto.php">Crear Contacto</a>
+    <a href="">Eliminar Contacto</a>
+    <a href="">Buscar un Contacto</a>
+    <a href="">Actualizar/modificar un Contacto</a>
+    <a href="logOut.php">LogOut</a>
+    </header>
     <h1>El usuario está en la bbdd</h1>
+    <hr>
+
+    
+    <input type="submit" name="crear" id="crear" value="Crear Contacto">
+    <input type="submit" name="eliminar" id="eliminar" value="Eliminar Contacto">
+    <input type="submit" name="buscar" id="buscar" value="Buscar un Contacto">
+    <input type="submit" name="actualizar" id="actualizar" value="Actualizar/modificar Contacto">
+
+
     <?php
 
         require_once '../conexion.php';
@@ -36,8 +53,10 @@
         $bd->query($sql_create);
 
 
-
+        echo "<h2>Datos de la tabla contactos</h2><br>";
         foreach($archivo as $contacto){
+            ?><hr>
+            <?php
             echo "DATOS DEL XML <br>";
             echo "Nombre: " . $contacto->nombre ."<br>";
             echo "Apellidos: " . $contacto->apellidos ."<br>";
@@ -53,5 +72,6 @@
         }
 
     ?>
+
 </body>
 </html>

@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['logueado']) || !$_SESSION['logueado']){
+        header("Location: index.php");
+    }    
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,8 +12,13 @@
     <title>Document</title>
 </head>
 <body>
+<header>
+    <a href="home.php">Inicio</a>
+    <a href="logOut.php">LogOut</a>
+    <hr>
+</header>
 <h1>FORMULARIO PARA INTRODUCIR UNA PERSONA EN LA BASE DE DATOS</h1>
-<form name ="formularioContactoPersona" action="auth.php" method="POST">
+<form name ="formularioContactoPersona" action="" method="POST">
     <p>
         <label for="usuario">Nombre: </label>
         <input type="text" name="nombre" id="nombre">
@@ -22,7 +33,40 @@
     </p>
     <p>
         <label for="telefono">Teléfono: </label>
-        <input type="text" name="telefono" id="telefono">
+        <input type="number" name="telefono" id="telefono">
     </p>
+    <input type="submit" name="envio" id="envio" value="Entrar">
+
+    <?php
+
+        require_once '../conexion.php';
+
+        if(isset($_POST['nombre']) && !empty($_POST['nombre']) && isset($_POST['apellidos']) && !empty($_POST['apellidos']) 
+        && isset($_POST['direccion']) && !empty($_POST['direccion']) && isset($_POST['telefono']) && !empty($_POST['telefono'])){
+            $nombre = $_POST['nombre'];
+            $apellidos = $_POST['apellidos'];
+            $direccion = $_POST['direccion'];
+            $telefono = $_POST['telefono'];
+            $email = "";
+            $sql = "INSERT INTO contactos VALUES('$nombre', '$apellidos', 
+            '$direccion', '$telefono', '$email')";
+            // $sql = "INSERT INTO contactos(nombre, apellidos, direccion, telefono) VALUES ('$nombre', '$apellidos', '$direccion', '$telefono')";
+            //la variable resultados es un objeto PDO que contiene la sentencia sql
+            $resultados = $bd->query($sql);
+            echo "<br><br>";
+
+            if($resultados == true){
+                echo "Se han introducio los datos en la base de datos.";
+            }
+            else{
+                echo "No se ha podido introducir los datos en la base de datos.";
+            }
+        }
+        else{
+            echo "Introduce los datos en los parámetros requeridos.";
+        }
+
+    ?>
 </body>
 </html>
+

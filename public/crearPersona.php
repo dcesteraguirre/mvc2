@@ -48,10 +48,8 @@
             $direccion = $_POST['direccion'];
             $telefono = $_POST['telefono'];
             $email = "";
-            $sql = "INSERT INTO contactos VALUES('$nombre', '$apellidos', 
-            '$direccion', '$telefono', '$email')";
-            // $sql = "INSERT INTO contactos(nombre, apellidos, direccion, telefono) VALUES ('$nombre', '$apellidos', '$direccion', '$telefono')";
-            //la variable resultados es un objeto PDO que contiene la sentencia sql
+            $sql = "INSERT INTO contactos VALUES('$nombre', '$apellidos', '$direccion', '$telefono', '$email')";
+            
             $resultados = $bd->query($sql);
             echo "<br><br>";
 

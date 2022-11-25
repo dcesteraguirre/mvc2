@@ -55,7 +55,7 @@
             echo "<br><br>";
 
             if($resultados == true){
-                echo "Se han introducio los datos en la base de datos.";
+                echo "Se han introducido los datos en la base de datos.";
             }
             else{
                 echo "No se ha podido introducir los datos en la base de datos.";

@@ -21,7 +21,7 @@
     <a href="crearContacto.php">Crear Contacto</a>
     <a href="eliminarContacto.php">Eliminar Contacto</a>
     <a href="buscarContacto.php">Buscar un Contacto</a>
-    <a href="actualizarContacto.php">Actualizar/modificar un Contacto</a>
+    <a href="opcionesModificacion.php">Actualizar/modificar un Contacto</a>
     <a href="logOut.php">LogOut</a>
     </header>
     <br>
@@ -33,12 +33,9 @@
         //Ruta donde se encuentra el arhvivo xml a importar
         $archivo = simplexml_load_file("../bd/agenda.xml");
 
-        //Sentencia para borrar la tabla en caso de que exista antes
-        $sql_delete="DROP TABLE contactos";
-        $bd->query($sql_delete);
 
         //Sentencia apra crear la tabla
-        $sql_create="CREATE TABLE `contactos` (
+        $sql_create="CREATE TABLE IF NOT EXISTS `contactos` (
             `nombre` varchar(40) NOT NULL,
             `apellidos` varchar(40) NOT NULL,
             `direccion` varchar(40) NOT NULL,
@@ -47,7 +44,7 @@
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;";
         $bd->query($sql_create);
 
-
+        //meter un boton
         echo "<h2>Datos del xml introducidos en la base de datos.</h2><br>";
         foreach($archivo as $contacto){
             ?><hr>

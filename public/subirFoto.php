@@ -1,4 +1,5 @@
 <?php
+    //iniciamos sesion, si previamente no se ha creado la sesion logueado mandará automaticamente al login
     session_start();
     if(!isset($_SESSION['logueado']) || !$_SESSION['logueado']){
         header("Location: index.php");
@@ -11,12 +12,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
+<body>
 <header>
+    <!-- header con el link a la pagina de home y otro para deslogearse y volver al login -->
     <a href="home.php">Inicio</a>
     <a href="logOut.php">LogOut</a>
     <hr>
 </header>
-<body>
+    <!-- añadimos la foto que queremos subir de nuestra maquina mediante enctype señalamos que hay una carga de archivo para que no lo omita, y la autoenviamos -->
+    <!-- con post a través del submit -->
     <form name ="subirFoto" action="" method="POST" enctype="multipart/form-data">
     Añadir imagen: <input name="archivo" id="archivo" type="file"/>
     <input type="submit" name="subir" value="Subir imagen"/>
@@ -24,7 +28,7 @@
 </html>
 <?php
     
-    //Si se quiere subir una imagen
+    //Comprobamos que se ha subido una foto a través del submit subir
     if (isset($_POST['subir'])) {
         //Recogemos el archivo enviado por el formulario
         $archivo = $_FILES['archivo']['name'];

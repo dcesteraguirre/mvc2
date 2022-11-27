@@ -1,4 +1,5 @@
 <?php
+    //iniciamos sesion, si previamente no se ha creado la sesion logueado mandará automaticamente al login
     session_start();
     if(!isset($_SESSION['logueado']) || !$_SESSION['logueado']){
         header("Location: index.php");
@@ -14,6 +15,7 @@
 </head>
 <body>
 <header>
+    <!-- header con el link a la pagina de home y otro para deslogearse y volver al login -->
     <a href="home.php">Inicio</a>
     <a href="logOut.php">LogOut</a>
     <hr>
@@ -45,10 +47,13 @@
         <input type="submit" name="modificar" id="modificar" value="Modificar">
         
         <?php
+        // require_once para acceder a la variable $bd que tiene los datos de la base de datos para acceder a ella
+        // y poder realizar sentencias
         require_once '../conexion.php';
 
         if(isset($_POST['nombre']) && !empty($_POST['nombre']) && isset($_POST['nombreNuevo']) && !empty($_POST['nombreNuevo']) && isset($_POST['apellidosNuevo']) && !empty($_POST['apellidosNuevo']) 
         && isset($_POST['direccionNueva']) && !empty($_POST['direccionNueva']) && isset($_POST['telefonoNuevo']) && !empty($_POST['telefonoNuevo'])){
+             // guardamos los datos enviados con el post en variables
             $nombre = $_POST['nombre'];
             $nombreNuevo = $_POST['nombreNuevo'];
             $apellidosNuevo = $_POST['apellidosNuevo'];
@@ -58,7 +63,7 @@
             $sql_Update= "UPDATE contactos SET nombre='$nombreNuevo', apellidos='$apellidosNuevo', direccion='$direccionNueva', telefono='$telefonoNuevo', email='$emailNuevo' WHERE nombre='$nombre'";
             $resultadosUpdate = $bd->query($sql_Update);
             echo "<br><br>";
-
+            //si se realiza la sentencia se mostrará un mensaje mostrando que se ha realizado
             if($resultadosUpdate == true){
                 echo "Se han actualizado los datos de $nombre en la base de datos.";
             
@@ -68,13 +73,14 @@
             }
 
             $sql = "SELECT * FROM contactos WHERE nombre = '$nombreNuevo'";
-            
+            //Realizamos la sentencia sql definida previamente
             $resultados = $bd->query($sql);
             echo "<br><br>";
             
             foreach($resultados as $row){
             ?>
                 <tr>
+                      <!-- mostramos por pantalla el resultado de la busqueda de los datos de esa fila a través del nombre -->
                     <td><?php echo "Nombre: " . $row['nombre'] . "<br>"?></td>
                     <td><?php echo "Apellidos: " . $row['apellidos'] . "<br>"?></td>
                     <td><?php echo "Direccion: " . $row['direccion'] . "<br>"?></td>
@@ -83,7 +89,7 @@
                 </tr>
             <?php
             }
-
+            //si se realiza la sentencia se mostrará un mensaje mostrando que se ha realizado
             if($resultados == true){
                 echo "<br> Se han mostrado los datos actualizados de $nombreNuevo.";
             }

@@ -6,7 +6,7 @@
     <title>Document</title>
 </head>
 <body>
-
+<!-- formulario de login cuyos datos, recibidos por texto, son enviados a "auth.php" a través del submit envio, mediante POST -->
 <h1>LOGIN</h1>
     <form name ="login" action="auth.php" method="POST">
     <p>

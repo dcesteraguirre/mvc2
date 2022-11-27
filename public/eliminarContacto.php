@@ -1,4 +1,5 @@
 <?php
+    //iniciamos sesion, si previamente no se ha creado la sesion logueado mandará automaticamente al login
     session_start();
     if(!isset($_SESSION['logueado']) || !$_SESSION['logueado']){
         header("Location: index.php");
@@ -13,6 +14,7 @@
 </head>
 <body>
 <header>
+    <!-- header con el link a la pagina de home y otro para deslogearse y volver al login -->
     <a href="home.php">Inicio</a>
     <a href="logOut.php">LogOut</a>
     <hr>
@@ -26,17 +28,19 @@
     <input type="submit" name="borrar" id="borrar" value="Borrar">
 
     <?php
-
+        // require_once para acceder a la variable $bd que tiene los datos de la base de datos para acceder a ella
+        // y poder realizar sentencias
         require_once '../conexion.php';
-
+        // comprobamos si se ha mandado los datos de nombre, y sino te muestra un mensaje
+        // para indicar que hay que rellenarlo
         if(isset($_POST['nombre']) && !empty($_POST['nombre'])){
+             // guardamos los datos enviados con el post en variables
             $nombre = $_POST['nombre'];
             $sql = "DELETE FROM contactos WHERE nombre = '$nombre'";
-            // $sql = "INSERT INTO contactos(nombre, apellidos, direccion, telefono) VALUES ('$nombre', '$apellidos', '$direccion', '$telefono')";
-            //la variable resultados es un objeto PDO que contiene la sentencia sql
+            //Realizamos la sentencia sql definida previamente
             $resultados = $bd->query($sql);
             echo "<br><br>";
-
+            //si se realiza la sentencia se mostrará un mensaje mostrando que se ha realizado
             if($resultados == true){
                 echo "Se han borrado el contacto llamado $nombre de la base de datos.";
             }

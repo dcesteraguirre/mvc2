@@ -1,4 +1,5 @@
 <?php
+    //iniciamos sesion, si previamente no se ha creado la sesion logueado mandará automaticamente al login
     session_start();
     if(!isset($_SESSION['logueado']) || !$_SESSION['logueado']){
         header("Location: index.php");
@@ -16,6 +17,7 @@
     <header>
     <h1>El usuario está en la bbdd</h1>
     <hr>
+    <!-- cada opcion es un link que reedirige a otra página -->
     <h4>Opciones:</h4>
     <a href="home.php">Inicio</a>
     <a href="crearContacto.php">Crear Contacto</a>
@@ -27,14 +29,17 @@
     </header>
     <br>
     <hr>
+    <!-- opcion de introducir los datos del XML en la taabla contactos -->
     <form name ="xmlIntroducir" action="" method="POST">
     <input type="submit" name="introducir" id="introducir" value="Meter datos del XML">
+    <!-- opcion de borrar los datos del XML de la tabla contactos -->
     <form name ="borrar" action="" method="POST">
     <input type="submit" name="borrarDatos" id="borrarDatos" value="Limpiar Tabla Contactos">
     
 </form>
     <?php
-
+    // require_once para acceder a la variable $bd que tiene los datos de la base de datos para acceder a ella
+    // y poder realizar sentencias
         require_once '../conexion.php';
 
         //Ruta donde se encuentra el arhvivo xml a importar
@@ -60,6 +65,7 @@
         if(isset($_POST['introducir'])){
         
             echo "<h2>Datos del xml introducidos en la base de datos.</h2><br>";
+            // recorremos el array archivo e introducimos cada dato
             foreach($archivo as $contacto){
                 ?><hr>
                 <?php
@@ -70,7 +76,7 @@
                 echo "Telefono: " . $contacto->telefono ."<br>";
                 echo "Email: " . $contacto->email . "<br>";
 
-                //Insertamos los datos
+                //Insertamos los datos los datos del xml a través de la sentencia en la base de datos contactos.
                 $sql_insert = "INSERT INTO contactos VALUES('$contacto->nombre', '$contacto->apellidos', 
                 '$contacto->direccion', '$contacto->telefono', '$contacto->email')";
                 $bd->query($sql_insert);
